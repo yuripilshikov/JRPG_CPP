@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="StateMachine">
+      <UniqueIdentifier>{fe0165cb-e9ec-4af4-8493-51033a34c376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine\Headers">
+      <UniqueIdentifier>{3f0638c1-64c2-4b8b-93a5-c18ab58356fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine\Source">
+      <UniqueIdentifier>{1e35de33-e983-481a-8479-3ccc533ee777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{44294795-3b62-4015-9cf5-e0780f5fdba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Headers">
+      <UniqueIdentifier>{0837da5d-75f9-448e-8b0e-f226711bf215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Source">
+      <UniqueIdentifier>{4518bfed-d768-4eef-aa39-e80d4d4c3753}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,16 +39,34 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>StateMachine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="IState.cpp">
+      <Filter>StateMachine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>StateMachine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingState.cpp">
+      <Filter>StateMachine\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="StateMachine.h">
+      <Filter>StateMachine\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IState.h">
+      <Filter>StateMachine\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>StateMachine\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayingState.h">
+      <Filter>StateMachine\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

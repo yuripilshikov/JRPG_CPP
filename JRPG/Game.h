@@ -1,9 +1,13 @@
 #pragma once
 
 #include <SDL.h>
+#include <unordered_map>
+#include <string>
+#include <vector>
 #include <memory>
 
-#include "World.h"
+#include "StateMachine.h"
+
 
 class Game
 {
@@ -12,17 +16,18 @@ public:
 	bool Initialize();
 	void RunLoop();
 	void Shutdown();
+
 private:
 	void ProcessInput();
 	void UpdateGame();
 	void GenerateOutput();
+
+	StateMachine m_SM;
 
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
 	bool m_isRunning;
 	Uint32 m_tickCount;
 
-	std::shared_ptr<World> world;
+	char currentAction;
 };
-
-// page 66

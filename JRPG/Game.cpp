@@ -1,10 +1,16 @@
 #include "Game.h"
+#include <algorithm>
+#include "MainMenuState.h"
+#include "PlayingState.h"
 
-Game::Game() : m_window(nullptr), m_renderer(nullptr), m_isRunning(false), m_tickCount(0)
-{}
+Game::Game() : m_window(nullptr), m_renderer(nullptr), m_SM(this), m_isRunning(false), m_tickCount(0), currentAction(0)
+{
+	
+}
 
 bool Game::Initialize()
 {
+	// Init SDL
 	int sdlResult = SDL_Init(SDL_INIT_VIDEO);
 	if (sdlResult != 0)
 	{
@@ -21,9 +27,10 @@ bool Game::Initialize()
 
 	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-
-	world = std::make_shared<World>();
-
+	// Init StateMachine
+	m_SM.Add("MainMenu", std::make_shared<MainMenuState>(this));	
+	m_SM.Add("Playing", std::make_shared<PlayingState>(this));
+	m_SM.Push("MainMenu");
 	m_isRunning = true;
 	return true;
 }
@@ -35,6 +42,7 @@ void Game::RunLoop()
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
+		currentAction = 0;
 	}
 }
 
@@ -55,6 +63,15 @@ void Game::ProcessInput()
 		case SDL_QUIT:
 			m_isRunning = false;
 			break;
+
+			// для "одиночных" нажатий
+		//case SDL_KEYDOWN:
+		//	switch (event.key.keysym.sym)
+		//	{
+		//	case SDLK_1: 
+		//		currentAction = '1';
+		//		break;
+		//	}
 		}
 	}
 
@@ -63,6 +80,12 @@ void Game::ProcessInput()
 	{
 		m_isRunning = false;
 	}
+	else if (state[SDL_SCANCODE_1]) // для "непрерывных" нажатий
+	{
+		currentAction = '1';
+		m_SM.Change("Playing");
+	}
+
 	
 }
 
@@ -76,6 +99,9 @@ void Game::UpdateGame()
 	{
 		deltaTime = 0.05f;
 	}
+
+	m_SM.Update(deltaTime, currentAction);
+
 }
 
 void Game::GenerateOutput()
@@ -86,9 +112,8 @@ void Game::GenerateOutput()
 
 	// generate output
 	SDL_SetRenderDrawColor(m_renderer, 200, 200, 200, 255);
-	SDL_Rect player{ world->playerX * 32, world->playerY * 32, 32, 32 };
-	SDL_RenderFillRect(m_renderer, &player);
+	
+	m_SM.Render(m_renderer);
 	
 	SDL_RenderPresent(m_renderer);
-
 }
