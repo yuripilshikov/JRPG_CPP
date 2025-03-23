@@ -51,6 +51,15 @@
     <ClCompile Include="PlayingState.cpp">
       <Filter>StateMachine\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>GameObjects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>GameObjects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -67,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="PlayingState.h">
       <Filter>StateMachine\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>GameObjects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>GameObjects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Generator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

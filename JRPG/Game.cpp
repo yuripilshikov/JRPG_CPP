@@ -85,6 +85,22 @@ void Game::ProcessInput()
 		currentAction = '1';
 		m_SM.Change("Playing");
 	}
+	else if (state[SDL_SCANCODE_W])
+	{
+		currentAction = 'W';
+	}
+	else if (state[SDL_SCANCODE_S])
+	{
+		currentAction = 'S';
+	}
+	else if (state[SDL_SCANCODE_A])
+	{
+		currentAction = 'A';
+	}
+	else if (state[SDL_SCANCODE_D])
+	{
+		currentAction = 'D';
+	}
 
 	
 }
