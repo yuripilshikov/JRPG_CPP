@@ -3,10 +3,10 @@
 
 void MainMenuState::Update(float deltaTime, char currentAction)
 {
-	if (currentAction)
+	/*if (currentAction)
 	{
 		std::cout << currentAction << std::endl;
-	}
+	}*/
 
 
 }

@@ -1,6 +1,9 @@
 #pragma once
 #include "IState.h"
-#include "Entity.h"
+
+#include "GameObject.h"
+#include "Components.h"
+#include "Systems.h"
 
 #include <vector>
 
@@ -18,7 +21,14 @@ public:
 private:
 	// specific for playing state
 	char map[20 * 20]{ 0 };
-	std::vector<Entity> m_entities;
-	Entity* m_player;	
+	//std::vector<Entity> m_entities;
+	//Entity* m_player;	
+
+	MovementSystem movement_system;
+	RenderSystem render_system;
+	InputSystem input_system;
+
+	std::vector<GameObject> m_gameObjects;
+	GameObject* m_player;
 };
 

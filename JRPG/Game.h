@@ -17,8 +17,10 @@ public:
 	void RunLoop();
 	void Shutdown();
 
+	void terminate() { m_isRunning = false; }
+
 private:
-	void ProcessInput();
+	//void ProcessInput();
 	void UpdateGame();
 	void GenerateOutput();
 

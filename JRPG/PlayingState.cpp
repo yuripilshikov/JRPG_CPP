@@ -2,37 +2,32 @@
 #include "Generator.h"
 #include <iostream>
 
+
+
 PlayingState::PlayingState(Game* game) : IState(game)
 {
-	m_entities.push_back(Entity(10, 10, 'x'));
-	m_player = &(m_entities.front());
-	Generator::GenerateRandomMap(map, 20, 20);
+	// create game objects (todo move to special factory or something like)
+	GameObject gameObject;
+	gameObject.add_component(new Transform{ 100, 100, 32 });
+	gameObject.add_component(new Velocity{ 0, 0 });
+	gameObject.add_component(new Renderable{ SDL_Color{255, 255, 255, 255} });
+
+	m_gameObjects.push_back(gameObject);
+			
+	m_player = &(m_gameObjects.front());
+
+	Generator::GenerateRandomMap(map, 20, 20);	
 }
 
 void PlayingState::Update(float deltaTime, char currentAction)
 {
-	if (currentAction != 0)
-	{
-		switch (currentAction)
-		{
-		case 'W':
-			m_player->Move(0, -1);
-			break;
-		case 'S':
-			m_player->Move(0, 1);
-			break;
-		case 'A':
-			m_player->Move(-1, 0);
-			break;
-		case 'D':
-			m_player->Move(1, 0);
-			break;
-		}
-	}
+	input_system.input(m_player, m_gameObjects, m_game);
+	movement_system.update(m_gameObjects);
 }
 
 void PlayingState::Render(SDL_Renderer* renderer)
 {
+	// todo move to render system
 	for (int y = 0; y < 20; ++y)
 	{
 		for (int x = 0; x < 20; ++x)
@@ -46,12 +41,17 @@ void PlayingState::Render(SDL_Renderer* renderer)
 		}
 	}
 
-	for (auto e : m_entities)
+
+	SDL_RenderDrawLine(renderer, 10, 10, 100, 100);
+
+	render_system.render(renderer, m_gameObjects);
+
+	/*for (auto e : m_entities)
 	{
 		SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
-		SDL_Rect r = { e.getX() * 32, e.getY() * 32, 32, 32 };
+		SDL_Rect r = { e.getX(), e.getY(), 32, 32 };
 		SDL_RenderFillRect(renderer, &r);
-	}
+	}*/
 
 }
 

@@ -30,7 +30,7 @@ bool Game::Initialize()
 	// Init StateMachine
 	m_SM.Add("MainMenu", std::make_shared<MainMenuState>(this));	
 	m_SM.Add("Playing", std::make_shared<PlayingState>(this));
-	m_SM.Push("MainMenu");
+	m_SM.Push("Playing");
 	m_isRunning = true;
 	return true;
 }
@@ -39,7 +39,7 @@ void Game::RunLoop()
 {
 	while (m_isRunning)
 	{
-		ProcessInput();
+		//ProcessInput();
 		UpdateGame();
 		GenerateOutput();
 		currentAction = 0;
@@ -53,57 +53,57 @@ void Game::Shutdown()
 	SDL_Quit();
 }
 
-void Game::ProcessInput()
-{
-	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			m_isRunning = false;
-			break;
-
-			// для "одиночных" нажатий
-		//case SDL_KEYDOWN:
-		//	switch (event.key.keysym.sym)
-		//	{
-		//	case SDLK_1: 
-		//		currentAction = '1';
-		//		break;
-		//	}
-		}
-	}
-
-	const Uint8* state = SDL_GetKeyboardState(NULL);
-	if (state[SDL_SCANCODE_ESCAPE])
-	{
-		m_isRunning = false;
-	}
-	else if (state[SDL_SCANCODE_1]) // для "непрерывных" нажатий
-	{
-		currentAction = '1';
-		m_SM.Change("Playing");
-	}
-	else if (state[SDL_SCANCODE_W])
-	{
-		currentAction = 'W';
-	}
-	else if (state[SDL_SCANCODE_S])
-	{
-		currentAction = 'S';
-	}
-	else if (state[SDL_SCANCODE_A])
-	{
-		currentAction = 'A';
-	}
-	else if (state[SDL_SCANCODE_D])
-	{
-		currentAction = 'D';
-	}
-
-	
-}
+//void Game::ProcessInput()
+//{
+//	SDL_Event event;
+//	while (SDL_PollEvent(&event))
+//	{
+//		switch (event.type)
+//		{
+//		case SDL_QUIT:
+//			m_isRunning = false;
+//			break;
+//
+//			// для "одиночных" нажатий
+//		//case SDL_KEYDOWN:
+//		//	switch (event.key.keysym.sym)
+//		//	{
+//		//	case SDLK_1: 
+//		//		currentAction = '1';
+//		//		break;
+//		//	}
+//		}
+//	}
+//
+//	const Uint8* state = SDL_GetKeyboardState(NULL);
+//	if (state[SDL_SCANCODE_ESCAPE])
+//	{
+//		m_isRunning = false;
+//	}
+//	else if (state[SDL_SCANCODE_1]) // для "непрерывных" нажатий
+//	{
+//		currentAction = '1';
+//		m_SM.Change("Playing");
+//	}
+//	/*else if (state[SDL_SCANCODE_W])
+//	{
+//		currentAction = 'W';
+//	}
+//	else if (state[SDL_SCANCODE_S])
+//	{
+//		currentAction = 'S';
+//	}
+//	else if (state[SDL_SCANCODE_A])
+//	{
+//		currentAction = 'A';
+//	}
+//	else if (state[SDL_SCANCODE_D])
+//	{
+//		currentAction = 'D';
+//	}*/
+//
+//	
+//}
 
 void Game::UpdateGame()
 {
@@ -116,19 +116,17 @@ void Game::UpdateGame()
 		deltaTime = 0.05f;
 	}
 
-	m_SM.Update(deltaTime, currentAction);
+	m_SM.Update(deltaTime, currentAction); // todo remove "current action"
+
 
 }
 
 void Game::GenerateOutput()
 {
 	SDL_SetRenderDrawColor(m_renderer, 0, 0, 255, 255);
-
 	SDL_RenderClear(m_renderer);
+	SDL_SetRenderDrawColor(m_renderer, 200, 200, 200, 255);	
 
-	// generate output
-	SDL_SetRenderDrawColor(m_renderer, 200, 200, 200, 255);
-	
 	m_SM.Render(m_renderer);
 	
 	SDL_RenderPresent(m_renderer);

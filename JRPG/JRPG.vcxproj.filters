@@ -31,6 +31,15 @@
     <Filter Include="GameObjects\Source">
       <UniqueIdentifier>{4518bfed-d768-4eef-aa39-e80d4d4c3753}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ECS">
+      <UniqueIdentifier>{08118046-e3bf-43a2-814e-30932954f95f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Headers">
+      <UniqueIdentifier>{ee12487a-f469-49b8-a893-673ca23d57e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\src">
+      <UniqueIdentifier>{cd410b50-11d6-47eb-a459-0499bce8e4df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,14 +60,17 @@
     <ClCompile Include="PlayingState.cpp">
       <Filter>StateMachine\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>GameObjects\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>GameObjects\Source</Filter>
     </ClCompile>
     <ClCompile Include="Generator.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>ECS\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems.h">
+      <Filter>ECS\Headers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,14 +89,17 @@
     <ClInclude Include="PlayingState.h">
       <Filter>StateMachine\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>GameObjects\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>GameObjects\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Generator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>ECS\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>ECS\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

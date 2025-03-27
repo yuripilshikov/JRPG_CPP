@@ -27,7 +27,7 @@ void StateMachine::Render(SDL_Renderer* renderer)
 	}
 	else
 	{
-		std::cerr << "Render:: No states in stack\n";
+		//std::cerr << "Render:: No states in stack\n";
 	}
 }
 
